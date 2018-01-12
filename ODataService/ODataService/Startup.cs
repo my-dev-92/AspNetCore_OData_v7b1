@@ -36,6 +36,7 @@ namespace ODataService
             var builder = new ODataConventionModelBuilder(app.ApplicationServices);
 
             builder.EntitySet<Product>("Products");
+            builder.ComplexType<ProductCategory>();
             builder.EnableLowerCamelCase();
 
             app.UseMvc(routeBuilder =>
