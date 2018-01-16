@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.AspNet.OData;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ODataService.Controllers
@@ -12,12 +13,12 @@ namespace ODataService.Controllers
         {
             return new string[] { "value1", "value2" };
         }
-
-        // GET api/values/5
+                
+        [EnableQuery]
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            return "value";
+            return $"Output: {id}";
         }
 
         // POST api/values

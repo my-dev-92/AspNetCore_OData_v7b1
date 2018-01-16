@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNet.OData;
+using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Mvc;
 using ODataService.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ODataService.Controllers
 {
@@ -30,11 +32,25 @@ namespace ODataService.Controllers
             return products;
         }
 
+        [ODataRoute("Products({Id})")]
+        public IActionResult GetById(int Id)
+        {
+            var item = products.FirstOrDefault(x => x.ID == Id);
+            return Ok(item);
+        }
 
-        [HttpPut("Products({ID})")]
         public IActionResult Put([FromBody]Product item)
         {
+            if (item == null) return BadRequest();
+
             return Ok(item);
+        }
+
+        public IActionResult Post([FromBody] List<ProductDTO> dtos)
+        {
+            if (dtos == null) return BadRequest();
+
+            return Ok(dtos);
         }
     }
 }
