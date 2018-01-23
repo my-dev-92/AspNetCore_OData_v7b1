@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ODataService.Controllers;
 using ODataService.Model;
+using System;
 
 namespace ODataService
 {
@@ -33,13 +35,16 @@ namespace ODataService
             }
 
             var builder = new ODataConventionModelBuilder(app.ApplicationServices);
-
-            builder.EntitySet<Product>("Products");
-            builder.ComplexType<ProductCategory>();
+            builder.Namespace = "Service";
             builder.EnableLowerCamelCase();
 
+            var pairings = builder.EntitySet<Product>("Products");
+            builder.ComplexType<ProductCategory>();
+
+            pairings.EntityType.Function("ExtendExpiration").Returns<Guid>();
+
             app.UseMvc(routeBuilder =>
-            {
+            {                
                 routeBuilder.MapODataServiceRoute("OData", "odata", builder.GetEdmModel());
 
                // Work-around for #1175

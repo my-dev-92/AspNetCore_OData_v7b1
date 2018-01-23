@@ -46,11 +46,18 @@ namespace ODataService.Controllers
             return Ok(item);
         }
 
-        public IActionResult Post([FromBody] List<ProductDTO> dtos)
+        public IActionResult Post([FromBody] List<Product> dtos)
         {
             if (dtos == null) return BadRequest();
 
             return Ok(dtos);
+        }
+
+        [HttpGet]
+        [ODataRoute("Products({id})/Service.ExtendExpiration")]
+        public IActionResult ExtendExpiration(int id)
+        {
+            return Ok(id);
         }
     }
 }
