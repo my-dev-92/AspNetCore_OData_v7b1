@@ -32,6 +32,7 @@ But if using another entity(ProductDTO):
 then dtos will have validate values(list objects)
 
 * Getting identification of entity in action:
+
 Earlier using of attribute `[HttpGet("{Id}")]` was worked fine, parameter `Id` had value. But in current version Core OData `Id` have empty value. If using of attribute `[ODataRoute("Products({Id})")]`, then `Id` will hase value.
 
 `[ODataRoute("Products({Id})")]
