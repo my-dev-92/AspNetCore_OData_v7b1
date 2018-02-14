@@ -1,4 +1,4 @@
-## Project using Microsoft.AspNetCore.OData 7.0.0-Nightly201801301327
+## Project using Microsoft.AspNetCore.OData 7.0.0-Nightly201802131328
 
 Checked the some issues, which must resolve for simple work the project.
 
