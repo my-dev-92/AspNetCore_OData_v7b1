@@ -39,7 +39,8 @@ namespace ODataService.Controllers
             return Ok(item);
         }
 
-        public IActionResult Put([FromBody]Product item)
+        [ODataRoute("Products({id})")]
+        public IActionResult Put(int id, [FromBody] Product item)
         {
             if (item == null) return BadRequest();
 
@@ -51,13 +52,6 @@ namespace ODataService.Controllers
             if (dtos == null) return BadRequest();
 
             return Ok(dtos);
-        }
-
-        [HttpGet]
-        [ODataRoute("Products({id})/Service.ExtendExpiration")]
-        public IActionResult ExtendExpiration(int id)
-        {
-            return Ok(id);
         }
     }
 }

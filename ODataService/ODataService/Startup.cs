@@ -4,9 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ODataService.Controllers;
 using ODataService.Model;
-using System;
 
 namespace ODataService
 {
@@ -38,10 +36,8 @@ namespace ODataService
             builder.Namespace = "Service";
             builder.EnableLowerCamelCase();
 
-            var pairings = builder.EntitySet<Product>("Products");
+            builder.EntitySet<Product>("Products");
             builder.ComplexType<ProductCategory>();
-
-            pairings.EntityType.Function("ExtendExpiration").Returns<Guid>();
 
             app.UseMvc(routeBuilder =>
             {                
